@@ -5,8 +5,8 @@
              type of medical treatment or diagnostics.
 """
 
-
-def dose_amount():
+#Input
+def get_input(): 
     print("Day One Dosing Guidelines")
     print("")
     print("Choose diagnosis:")
@@ -19,6 +19,10 @@ def dose_amount():
     print("Enter patient weight followed by units of kg or lb.")
     print("Examples:  65.3 lb      21.0 kg")
     weight_input = input("Enter weight: ")
+    return weight_input,diagnosis
+    
+# Data Manipulation
+def data_manipulation(weight_input,diagnosis):
     weight_data = weight_input.split(" ")
     weight = float(weight_data[0])
     units = weight_data[1]
@@ -27,12 +31,20 @@ def dose_amount():
     dosages_mg_per_kg = [30, 10, 10, 12]
     dosage_mg_per_kg = dosages_mg_per_kg[diagnosis-1]
     dosage_mg_first_day = weight * dosage_mg_per_kg
+    return dosage_mg_first_day, weight
+    
+# Output
+def do_output(weight,dosage_mg_first_day):
     print("CORRECT DOSAGE")
     print("For a patient weighing {:.1f} kg,".format(weight))
     print("  the correct dosage is {:.1f} mg the first day"
           .format(dosage_mg_first_day))
 
-
+def dosing_function():
+    weight, diag = get_input()
+    dosage_amount, weight = data_manipulation(weight,diag)
+    do_output(weight,dosage_amount)
+    
 if __name__ == '__main__':
-    dose_amount()
+    dosing_function()
 
